@@ -1,0 +1,72 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <title>Testing</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body link="white" vlink="white" bgcolor = "white" background="skies.jpg">
+  <div class = 'ball' style="background:red">I</div> 
+  <div class = 'ball' style="background:white">K</div>
+  <div class = 'ball' style="background:blue">J</div> 
+  <div class = 'ball' style="background:blue">H</div>
+  <div class = 'ball' style="background:red">E</div>
+  <div class = 'ball' style="background:red">O</div> 
+  <div class = 'ball' style="background:white">N</div>
+  <div class = 'ball' style="background:red">A</div> 
+  <div class = 'ball' style="background:blue">V</div>
+  <div class = 'ball' style="background:white">U</div>
+
+<script>
+  
+  var balls = document.querySelectorAll('.ball');
+  var left =0;
+  for (var i = 0; i < balls.length; i++) {
+    balls[i].style.left = left + 'px';
+    left += 120; 
+  };
+  
+  document.onmousedown = function(event) {
+    if(event.target.tagName != 'DIV') return;
+    var ball = event.target;
+    
+    function getCoords(elem) { 
+      var box = elem.getBoundingClientRect();
+
+      return {
+        top: box.top + pageYOffset,
+        left: box.left + pageXOffset
+      };
+
+    }
+    var coords = getCoords(ball);
+    
+    var shiftX = event.pageX - coords.left;
+    var shiftY = event.pageY - coords.top;
+
+    moveAt(event);
+
+    ball.style.zIndex = 1000;
+
+     
+    function moveAt(event) {
+      ball.style.left = event.pageX - shiftX + 'px';
+      ball.style.top = event.pageY - shiftY + 'px';
+    }
+
+    document.onmousemove = function(event) {
+      moveAt(event);
+    }
+
+    ball.onmouseup = function() {
+      document.onmousemove = null;
+      ball.onmouseup = null;
+    }
+    
+
+  }
+</script>
+</body>
+</html>
+   

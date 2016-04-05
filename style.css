@@ -1,0 +1,13 @@
+body {
+  text-align: center;
+  font-size: 90px;
+}
+.ball {
+	position: absolute;
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+}
+div {
+  cursor: pointer;
+}
